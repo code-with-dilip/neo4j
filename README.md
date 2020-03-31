@@ -31,5 +31,5 @@ create(:Person{name:"Dilip"}) -> [:loves]->(:Technology{name:"Java"})
 
 #### non directional
 ```
-create(:Person{name:"Dilip"}) - [:loves] - (:Technology{name:"Java"})
+create(:Person{name:"Dilip"}) - [:loves] - (:Pet{name:"Scooby"})
 ```
