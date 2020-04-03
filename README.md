@@ -204,6 +204,8 @@ return
 
 - The **SET** Command below sets additional properties to the returned result.
 
+- Approach 1
+
 ```
 MATCH
   (p1:Person)-[:Lives_In]->(c:City)
@@ -214,6 +216,20 @@ SET
 return
   c
 ```
+
+- Approach 2
+
+```
+MATCH
+  (p1:Person)-[:Lives_In]->(c:City)
+WHERE  
+  p1.name='Dilip'
+SET
+  c+ = {name: 'AppleValley'}
+return
+  c
+```
+
 
 #### DELETE ALL THE Data
 
@@ -231,3 +247,17 @@ ON CREATE SET
   p2.email = 'abc'
 MERGE (p2) -[:Loves]-> (p1)
 ```
+
+#### Regular Expressions
+
+- The support for regular expressions can be done using **=~**
+
+- The below query matches a person with the name starting at **D**
+
+```
+MATCH(p:Person) where p.name =~ 'D.+' return p
+```
+
+#### Boolean Operators
+
+- AND, OR, XOR, NOT
