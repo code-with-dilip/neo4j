@@ -7,7 +7,9 @@ import org.springframework.data.repository.CrudRepository
 
 interface PersonRepository : Neo4jRepository<Person, Long> {
 
+/*
     fun findByName(name: String?): Person?
+*/
 
 }
 

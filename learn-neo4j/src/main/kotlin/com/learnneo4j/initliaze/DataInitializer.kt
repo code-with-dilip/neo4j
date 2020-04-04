@@ -4,15 +4,13 @@ import com.learnneo4j.entity.Person
 import com.learnneo4j.entity.Role
 import com.learnneo4j.entity.Team
 import com.learnneo4j.repository.PersonRepository
-import com.learnneo4j.repository.RoleRepository
 import com.learnneo4j.repository.TeamRepository
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
 
 @Component
 class DataInitializer(val personRepository: PersonRepository,
-                      val teamRepository: TeamRepository,
-                      val roleRepository: RoleRepository) : CommandLineRunner {
+                      val teamRepository: TeamRepository) : CommandLineRunner {
     override fun run(vararg args: String?) {
         println("Inside Initialize")
         personRepository.deleteAll()
@@ -32,15 +30,14 @@ class DataInitializer(val personRepository: PersonRepository,
         this.addingPersonsToTeam(team, listOf(p1, p2, p3, p4))
         println("Compeleted the mapping and saved the Person")
 
-//        addRole("LEAD_ENGINEER", p1, team)
+        addRole("LEAD_ENGINEER", p1, team)
+        addRole("Senior Engineering Manager", p2, team)
+
 
     }
 
     private fun addRole(role: String, p1: Person, team: Team) {
-
-        val role = Role(role=role, start = p1, end =  team)
-      //  p1.addRole(role)
-        roleRepository.save(role)
+        p1.addRole(team, role)
         personRepository.save(p1)
     }
 
@@ -49,11 +46,10 @@ class DataInitializer(val personRepository: PersonRepository,
         println("Persisted Team is $team")
     }
 
-    private fun addingPersonsToTeam(team : Team , personList : List<Person>) {
-        personList.
-                forEach {
-                    team.addedToTeam(it)
-                }
+    private fun addingPersonsToTeam(team: Team, personList: List<Person>) {
+        personList.forEach {
+            team.addedToTeam(it)
+        }
         teamRepository.save(team)
         println("TeamMembers are added to the team $team")
     }

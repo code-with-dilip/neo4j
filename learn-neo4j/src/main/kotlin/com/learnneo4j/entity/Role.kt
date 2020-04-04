@@ -1,14 +1,21 @@
 package com.learnneo4j.entity
 
-import org.neo4j.ogm.annotation.GeneratedValue
-import org.neo4j.ogm.annotation.Id
-import org.neo4j.ogm.annotation.RelationshipEntity
-import org.neo4j.ogm.annotation.StartNode
+import com.fasterxml.jackson.annotation.JsonBackReference
+import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import org.neo4j.ogm.annotation.*
 
 @RelationshipEntity(type = "ROLE")
-data class Role(@Id @GeneratedValue val id: Long?=null,
-                val role: String,
+class Role(@Id @GeneratedValue val id: Long?=null,
                 @StartNode
+                @JsonIgnore
                 val start: Person,
-                @StartNode
-                val end: Team)
+                val role: String,
+                @EndNode
+                @JsonIgnore
+                val end: Team){
+
+    override fun toString(): String {
+        return "Role(id=$id,  role='$role)"
+    }
+}
