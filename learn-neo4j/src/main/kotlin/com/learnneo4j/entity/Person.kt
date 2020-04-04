@@ -15,8 +15,8 @@ data class Person(@Id @GeneratedValue val id: Long? = null,
     @Relationship(type = "TEAMMATE", direction = Relationship.UNDIRECTED)
     var teammates: MutableSet<Person>? = null
 
-    @Relationship(type = "PART_OF")
-    var teamMateRoles: MutableSet<Team>? = null
+    /*@Relationship(type = "ROLE", direction = Relationship.OUTGOING)
+    var roleRelationship: MutableSet<Role>? = null*/
 
     fun worksWith(person: Person?) {
         if (teammates == null) {
@@ -25,15 +25,8 @@ data class Person(@Id @GeneratedValue val id: Long? = null,
         teammates!!.add(person!!)
     }
 
-    fun partOf(team : Team){
-        if (teamMateRoles == null) {
-            teamMateRoles = HashSet()
-        }
-        teamMateRoles!!.add(team)
-
-
-    }
-
-
+   /* fun addRole(role: Role) {
+        this.roleRelationship = role
+    }*/
 
 }

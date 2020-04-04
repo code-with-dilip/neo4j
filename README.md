@@ -48,7 +48,7 @@ http://localhost:7474/browser/
 
 ```
 username : neo4j
-password : neo4j
+password : neo4j or password
 ```
 
 ## Querying neo4j using Cypher
@@ -260,4 +260,4 @@ MATCH(p:Person) where p.name =~ 'D.+' return p
 
 #### Boolean Operators
 
-- AND, OR, XOR, NOT
+- AND, OR, XOR, NOT             
